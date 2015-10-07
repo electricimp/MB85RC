@@ -224,30 +224,3 @@ This method creates a new blob, populates it with *numBytes* of data read from F
 ### readintoblob(*addr*, *tBlob*, *numBytes*)
 
 This method reads *numBytes* of data read from FRAM (starting at address *addr*) and writes it into the blob passed into the second parameter, *tBlob*.
-
-## FramStore Usage
-
-### Constructor: FramStore(*frams*][, *debug*])
-
-The constructor takes an array of up to eight objects representing individual FRAM chips. These objects may be *MB85RC* objects *(see above)* or some other object specifying a different type of FRAM chip.
-
-The second parameter, *debug*, is optional: pass `true` to receive progress messages during various class methods.
-
-If the constructor encounters an error during initialization, it will return `null` and post an error message to the log. Your code should check for a return value `null` before proceeding to use the FRAM store.
-
-#### Example
-
-```
-#require "FramStore.class.nut:1.0.0"
-#require "MB85RC.class.nut:1.0.0"
-
-// Configure I2C bus
-local i2c = hardware.i2c89;
-i2c.configure(CLOCK_SPEED_400_KHZ);
-
-local f1 = MB85RC(i2c, 0xA0, 256);
-local f2 = MB85RC(i2c, 0xA2, 256);
-
-// Configure FRAM array with four devices
-local store = FramStore([f1, f2]);
-```
