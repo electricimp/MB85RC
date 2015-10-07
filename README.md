@@ -229,4 +229,4 @@ This method reads *numBytes* of data read from FRAM (starting at address *addr*)
 
 ## License
 
-The I2CFram library is licensed under the [MIT License](https://github.com/electricimp/MB85RC/blob/1.0.0/LICENSE).
+The MB85RC library is licensed under the [MIT License](https://github.com/electricimp/MB85RC/blob/master/LICENSE).
