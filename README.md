@@ -226,3 +226,7 @@ This method creates a new blob, populates it with *numBytes* of data read from F
 ### readintoblob(*addr*, *tBlob*, *numBytes*)
 
 This method reads *numBytes* of data read from FRAM (starting at address *addr*) and writes it into the blob passed into the second parameter, *tBlob*.
+
+## License
+
+The I2CFram library is licensed under the [MIT License](https://github.com/electricimp/MB85RC/blob/1.0.0/LICENSE).
