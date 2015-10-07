@@ -4,9 +4,9 @@ This library is designed to help you manage a number of Ferroelectric RAM (FRAM)
 
 The MB85RC256V is the prime component of Adafruit’s [I&sup2;C Non-Volatile FRAM Breakout](http://www.adafruit.com/product/1895). This breakout includes 32KB of FRAM, but FRAM chips are available in a range of capacities. The MB85RC256V is available in 4, 16, 64, 256, 512 and 1024kb, for example. Up to eight MB85RC256Vs can be connected to each imp I&sup2;C bus. This is limited in comparison with Flash, but useful for applications that need to preserve data across device restarts.
 
-Each FRAM’s storage is accessed at the byte level; each byte has a 16-bit address. The classes support writing to and reading from chips and store on a byte-by-byte basis. They also support the writing of a blob to a chip or store, and multiple bytes can be read back into a blob. As such, the classes are a good partner for Electric Imp’s [serializer class](https://electricimp.com/docs/libraries/utilities/), which converts Squirrel objects into binary data for storage. The *FramStore* class also supports writing and reading strings.
+Each FRAM’s storage is accessed at the byte level; each byte has a 16-bit address. The class supports writing to and reading from chips and store on a byte-by-byte basis. It also supports the writing of a blob to a chip or store, and multiple bytes can be read back into a blob. As such, the classes are a good partner for Electric Imp’s [serializer class](https://electricimp.com/docs/libraries/utilities/), which converts Squirrel objects into binary data for storage.
 
-**To add these libraries to your project, add** `#require "MB85RC.class.nut:1.0.0"` and `#require "FramStore.class.nut:1.0.0"` **to the top of your device code**
+**To add this libraries to your project, add** `#require "MB85RC.class.nut:1.0.0"` **to the top of your device code**
 
 ### MB85RC256V Addressing
 
@@ -251,4 +251,3 @@ local f2 = MB85RC(i2c, 0xA2, 256);
 // Configure FRAM array with four devices
 local store = FramStore([f1, f2]);
 ```
-
