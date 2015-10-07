@@ -185,6 +185,8 @@ for (local i = 0 ; i < numFrams ; ++i) {
 }
 ```
 
+## hardware.spiflash Methods
+
 The following methods provide a measure of compatibility with the imp API’s [**hardware.spiflash**](https://electricimp.com/docs/api/hardware/spiflash/) class. This has been done to assist developers wishing to migrate from spiflash because of its limitations, such as the need to erase at the sector level before a single bit can be written to that sector. 
 
 ### enable()
