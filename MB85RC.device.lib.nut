@@ -1,7 +1,7 @@
 class MB85RC {
     // Represents a single Fujitsu MB85RC FRAM chip
 
-    static VERSION = [1,0,0];
+    static VERSION = "2.0.0";
 
     static SPIFLASH_PREVERIFY = 2;
     static SPIFLASH_POSTVERIFY = 1;
