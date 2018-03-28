@@ -24,7 +24,7 @@ Each MB85RC256V has three pins through which its I&sup2;C address is set: A0, A1
 | 1010 | 1 | 1 | 0 | 0xAC |
 | 1010 | 1 | 1 | 1 | 0xAE |
 
-&nbsp;<br>As such, you can address up to eight MB85RC256Vs per bus. Remember, bit 0 of the address is set for write operations and cleared for reads.
+As such, you can address up to eight MB85RC256Vs per bus. Remember, bit 0 of the address is set for write operations and cleared for reads.
 
 ## MB85RC Usage ##
 
@@ -39,7 +39,7 @@ The fourth parameter, *debug*, is also optional: it defaults to `false`, but if 
 #### Example ####
 
 ```squirrel
-#require "MB85RC.class.nut:1.0.0"
+#require "MB85RC.class.nut:2.0.0"
 
 const BASE_I2C_ADDRESS = 0xA0;
 
@@ -73,7 +73,7 @@ fram.clear(EOF_MARKER);
 
 ### readByte(*address*) ###
 
-This method reads and returns the unsigned 8-bit value located at *address*. The returned value is a single-character string.
+This method reads and returns the unsigned 8-bit value located at *address* as a Squirrel integer (32-bit signed).
 
 If the passed address is outside the chip’s address space, the method returns the value -1. This value may also be returned if there has been an I&sup2;C read error &ndash; consult the [i2c.readerror()](https://developer.electricimp.com/api/hardware/i2c/readerror) documentation for possible values and their causes.
 
@@ -106,9 +106,9 @@ If the attempt to generate the blob’s contents tries to read beyond the chip�
 
 For an example, see [*readByte()*](#readbyte-address).
 
-### writeBlob(*startAddress*, *data*[, *wrap*]) ###
+### writeBlob(*startAddress*, *data*) ###
 
-This method writes the passed blob, *data*, starting at *address*. If the address is out of range, or the data incorrectly specified, the method returns the value -1. The third parameter, *wrap*, is optional and defaults to `false`. If *wrap* is set to `true`, then should there be an attempt to write data beyond the chip’s top address, then those bytes will be written to address 0x0000 and up until the blob is depleted.
+This method writes the passed blob, *data*, starting at *address*. If the address is out of range, or the data incorrectly specified, the method returns the value -1.
 
 #### Example ####
 
@@ -163,7 +163,7 @@ frams.clearStore(0x01);
 
 ### maxAddress() ###
 
-This method returns the chip’s top memory address + 1. For example, if the chip has 32KB of storage, its 16-bit address space runs from 0x0000 to 0x7FFF. Calling *maxAddress()* will return 0x8000.
+This method returns the chip’s top memory address. For example, if the chip has 32KB of storage, its 16-bit address space runs from 0x0000 to 0x7FFF. Calling *maxAddress()* will return 0x7FFF.
 
 ### csize() ###
 
@@ -213,13 +213,17 @@ This method returns the MB85RC256V chip’s capacity in bytes.
 
 ### write(*addr*, *source*[, *flags*][, *start*][, *end*]) ###
 
-This method writes the blob passed into *source* at the address *addr*. The optional parameters *start* and *end* specify start and end points within *source* which mark the bytes that will be transferred. For example, if the blob passed into *source* is 512 bytes long, but you only wish to write the first 128 bytes to FRAM, you would use:
+This method writes the blob or string passed into *source* at the address *addr*. The optional parameters *start* and *end* specify start and end points within *source* which mark the bytes that will be transferred. For example, if the blob passed into *source* is 512 bytes long, but you only wish to write the first 128 bytes to FRAM, you would use:
 
 ```squirrel
-fram.write(0, source, 0, 0, 128);
+fram.write(0, "fintlewoodlewix, MB85RC_SPIFLASH_NOERROR, 0, 128);
 ```
 
-The *flags* parameter allows you to trigger pre- and post-verification of writes *(see [**hardware.spiflash.write()**](https://developer.electricimp.com/api/hardware/spiflash/write)*.
+The *flags* parameter allows you to trigger pre- and post-verification of writes *(see [**hardware.spiflash.write()**](https://developer.electricimp.com/api/hardware/spiflash/write)*:
+
+- *MB85RC_SPIFLASH_PREVERIFY*
+- *const MB85RC_SPIFLASH_POSTVERIFY*
+- *MB85RC_SPIFLASH_NOERROR*
 
 ### read(*addr*, *numBytes*) ###
 
@@ -231,4 +235,4 @@ This method reads *numBytes* of data read from FRAM (starting at address *addr*)
 
 ## License ##
 
-The MB85RC library is licensed under the [MIT License](https://github.com/electricimp/MB85RC/blob/master/LICENSE).
+The MB85RC library is licensed under the [MIT License](https://developer.electricimp.com/libraries/mitlicense).
