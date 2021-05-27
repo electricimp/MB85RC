@@ -1,7 +1,7 @@
 class MB85RC {
     // Represents a single Fujitsu MB85RC FRAM chip
 
-    static VERSION = [1,0,0];
+    static VERSION = "1.0.1";
 
     static SPIFLASH_PREVERIFY = 2;
     static SPIFLASH_POSTVERIFY = 1;
@@ -15,10 +15,10 @@ class MB85RC {
     _debug = false;
     _minAddress = 0x0000;
     _maxAddress = 0x7FFF;
-    _size = 256;
+    _size = 0;
     _productID = 0;
 
-    constructor (i2cBus = null, i2cAddress = 0xA0, size = 256, writeProtectPin = null, debug = false) {
+    constructor (i2cBus = null, i2cAddress = 0xA0, size = 0, writeProtectPin = null, debug = false) {
         if (i2cBus == null) {
             throw("Null I2C bus passed to MB85RC constructor");
             return null;
@@ -41,26 +41,25 @@ class MB85RC {
             }
         }
 
-        switch(_size)
-        {
+        switch(_size) {
             case 4 :
-            _productID = 0x010;
-            break;
+                _productID = 0x010;
+                break;
             case 64 :
-            _productID = 0x358;
-            break;
+                _productID = 0x358;
+                break;
             case 256 :
-            _productID = 0x510;
-            break;
+                _productID = 0x510;
+                break;
             case 512 :
-            _productID = 0x658;
-            break;
+                _productID = 0x658;
+                break;
             case 1024 :
-            _productID = 0x758;
-            break;
+                _productID = 0x758;
+                break;
             default:
-            server.log("Product ID not found for this size: " + size);
-            _productID = 0;
+                server.log("Product ID not found for this size: " + size);
+                _productID = 0;
         }
 
         if (!sFlag) {
