@@ -16,6 +16,7 @@ class MB85RC {
     _minAddress = 0x0000;
     _maxAddress = 0x7FFF;
     _size = 256;
+    _productID = 0;
 
     constructor (i2cBus = null, i2cAddress = 0xA0, size = 256, writeProtectPin = null, debug = false) {
         if (i2cBus == null) {
@@ -38,6 +39,28 @@ class MB85RC {
                 _size = size;
                 sFlag = true;
             }
+        }
+
+        switch(_size)
+        {
+            case 4 :
+            _productID = 0x010;
+            break;
+            case 64 :
+            _productID = 0x358;
+            break;
+            case 256 :
+            _productID = 0x510;
+            break;
+            case 512 :
+            _productID = 0x658;
+            break;
+            case 1024 :
+            _productID = 0x758;
+            break;
+            default:
+            server.log("Product ID not found for this size: " + size);
+            _productID = 0;
         }
 
         if (!sFlag) {
@@ -293,7 +316,7 @@ class MB85RC {
             return false;
         }
 
-        if (prodID != 0x510) {
+        if (prodID != _productID) {
             server.error("Unexpected Product ID: 0x" + prodID + " for chip at I2C address: " + format("0x%02X", _i2cAddr));
             return false;
         }
