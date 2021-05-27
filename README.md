@@ -1,4 +1,4 @@
-# MB85RC Library
+# MB85RC 1.0.1
 
 This library is designed to help you manage a number of Ferroelectric RAM (FRAM) chips, such as the Fujitsu MB85RC256V. Each chip contains non-volatile storage with a read/write endurance and access speed well in excess of standard Flash storage, though at the cost of a much lower bytes per dollar value. For more information on FRAM see [Wikipedia](https://en.wikipedia.org/wiki/Ferroelectric_RAM). 
 
@@ -6,7 +6,7 @@ The MB85RC256V is the prime component of Adafruit’s [I&sup2;C Non-Volatile FRA
 
 Each FRAM’s storage is accessed at the byte level; each byte has a 16-bit address. The class supports writing to and reading from chips and store on a byte-by-byte basis. It also supports the writing of a blob to a chip or store, and multiple bytes can be read back into a blob. As such, the classes are a good partner for Electric Imp’s [serializer class](https://electricimp.com/docs/libraries/utilities/), which converts Squirrel objects into binary data for storage.
 
-**To add this libraries to your project, add** `#require "MB85RC.class.nut:1.0.0"` **to the top of your device code**
+**To add this libraries to your project, add** `#require "MB85RC.class.nut:1.0.1"` **to the top of your device code**
 
 ### MB85RC256V Addressing
 
@@ -30,7 +30,7 @@ Each MB85RC256V has three pins through which its I&sup2;C address is set: A0, A1
 
 ### Constructor: MB85RC(*i2cBus*, *i2cAddress*, *size*[, *writeProtectPin*][, *debug*])
 
-The constructor takes a **configured** imp I&sup2;C bus. The chip’s I&sup2C; address is required as the second parameter it defaults to 0xA0 *(see [above](#mb85rc256v-addressing))*. The third parameter, *size*, is used to specify the FRAM chip’s capacity in kb (kilobits), eg. 256 for 32KB FRAMs.
+The constructor takes a **configured** imp I&sup2;C bus. The chip’s I&sup2C; address is required as the second parameter it defaults to 0xA0 *(see [above](#mb85rc256v-addressing))*. The third parameter, *size*, is used to specify the FRAM chip’s capacity in Kb (kilobits), eg. 256 for 256Kb/32KB FRAMs.
 
 The fourth parameter, *writeProtectPin*, is optional and may be set to any spare [imp pin object](https://electricimp.com/docs/api/hardware/pin/), which will be configured as a digital output in order to control the MB85RC256V’s write-protect pin. When this pin is set to 1 (logic high), the chip is temporarily write-protected; attempts to write data to the chip will have no effect. Note that no warning is given if data is being written to a write-protected chip; the data written is ignored. Write-protect remains in force until the pin is set to 0 (logic low) or the chip is power-cycled.
 
@@ -39,7 +39,7 @@ The fourth parameter, *debug*, is also optional: it defaults to `false`, but if 
 #### Example
 
 ```
-#require "MB85RC.class.nut:1.0.0"
+#require "MB85RC.class.nut:1.0.1"
 
 const BASE_I2C_ADDRESS = 0xA0;
 
