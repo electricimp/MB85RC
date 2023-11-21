@@ -1,12 +1,12 @@
 # MB85RC 1.0.1
 
-This library is designed to help you manage a number of Ferroelectric RAM (FRAM) chips, such as the Fujitsu MB85RC256V. Each chip contains non-volatile storage with a read/write endurance and access speed well in excess of standard Flash storage, though at the cost of a much lower bytes per dollar value. For more information on FRAM see [Wikipedia](https://en.wikipedia.org/wiki/Ferroelectric_RAM). 
+This library is designed to help you manage a number of Ferroelectric RAM (FRAM) chips, such as the Fujitsu MB85RC256V. Each chip contains non-volatile storage with a read/write endurance and access speed well in excess of standard Flash storage, though at the cost of a much lower bytes per dollar value. For more information on FRAM see [Wikipedia](https://en.wikipedia.org/wiki/Ferroelectric_RAM).
 
 The MB85RC256V is the prime component of Adafruit’s [I&sup2;C Non-Volatile FRAM Breakout](http://www.adafruit.com/product/1895). This breakout includes 32KB of FRAM, but FRAM chips are available in a range of capacities. The MB85RC256V is available in 4, 16, 64, 256, 512 and 1024kb, for example. Up to eight MB85RC256Vs can be connected to each imp I&sup2;C bus. This is limited in comparison with Flash, but useful for applications that need to preserve data across device restarts.
 
 Each FRAM’s storage is accessed at the byte level; each byte has a 16-bit address. The class supports writing to and reading from chips and store on a byte-by-byte basis. It also supports the writing of a blob to a chip or store, and multiple bytes can be read back into a blob. As such, the classes are a good partner for Electric Imp’s [serializer class](https://electricimp.com/docs/libraries/utilities/), which converts Squirrel objects into binary data for storage.
 
-**To add this libraries to your project, add** `#require "MB85RC.class.nut:1.0.1"` **to the top of your device code**
+**To add this libraries to your project, add** `#require "mb85rc.class.nut:1.0.1"` **to the top of your device code**
 
 ### MB85RC256V Addressing
 
@@ -39,7 +39,7 @@ The fourth parameter, *debug*, is also optional: it defaults to `false`, but if 
 #### Example
 
 ```
-#require "MB85RC.class.nut:1.0.1"
+#require "mb85rc.class.nut:1.0.1"
 
 const BASE_I2C_ADDRESS = 0xA0;
 
@@ -187,7 +187,7 @@ for (local i = 0 ; i < numFrams ; ++i) {
 
 ## hardware.spiflash Methods
 
-The following methods provide a measure of compatibility with the imp API’s [**hardware.spiflash**](https://electricimp.com/docs/api/hardware/spiflash/) class. This has been done to assist developers wishing to migrate from spiflash because of its limitations, such as the need to erase at the sector level before a single bit can be written to that sector. 
+The following methods provide a measure of compatibility with the imp API’s [**hardware.spiflash**](https://electricimp.com/docs/api/hardware/spiflash/) class. This has been done to assist developers wishing to migrate from spiflash because of its limitations, such as the need to erase at the sector level before a single bit can be written to that sector.
 
 ### enable()
 
